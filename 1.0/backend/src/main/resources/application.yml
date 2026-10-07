@@ -1,0 +1,44 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: energy-term-bank
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/energy_term_db?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: shs
+    password: 20051024
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+    default-property-inclusion: non_null
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 25MB
+
+mybatis-plus:
+  configuration:
+    # 列名与实体字段同名（camelCase），关闭下划线转换
+    map-underscore-to-camel-case: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+      table-underline: false
+
+# 业务配置
+app:
+  jwt:
+    secret: change-this-secret-in-production-please-32bytes-min
+    expire-days: 30
+  upload-dir: uploads
+  cors-origins: "http://localhost:5173,http://localhost:3000"
+
+logging:
+  level:
+    com.cnru.termbank: debug
